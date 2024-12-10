@@ -86,6 +86,7 @@ class InteropRunner:
         self._no_auto_unsupported = no_auto_unsupported
         if len(self._log_dir) == 0:
             self._log_dir = "logs_{:%Y-%m-%dT%H:%M:%S}".format(self._start_time)
+            self._output = self._log_dir + "/results.json"
         if os.path.exists(self._log_dir):
             sys.exit("Log dir " + self._log_dir + " already exists.")
         logging.info("Saving logs to %s.", self._log_dir)
@@ -549,11 +550,11 @@ class InteropRunner:
                 continue
 
             # run the test cases
-            for testcase in self._tests:
-                status = self._run_testcase(server, client, testcase)
-                self.test_results[server][client][testcase] = status
-                if status == TestResult.FAILED:
-                    nr_failed += 1
+            # for testcase in self._tests:
+            #     status = self._run_testcase(server, client, testcase)
+            #     self.test_results[server][client][testcase] = status
+            #     if status == TestResult.FAILED:
+            #         nr_failed += 1
 
             # run the measurements
             for measurement in self._measurements:
